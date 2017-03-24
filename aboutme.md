@@ -1,7 +1,8 @@
 ---
 layout: page
 title: About me
-subtitle: Where I tell you stuff you don't care about.
+subtitle: Where I tell you stuff about me
+image: /img/me and rogue.jpg
 ---
 
 My name is Arthur
