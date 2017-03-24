@@ -43,7 +43,7 @@ avatar: "/img/avatar-icon.png"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Arthur Barros
-  email: "arthur.e.barros@gmail.com"
+  email: arthur.e.barros@gmail.com
   facebook: arthur.barros.16  # eg. daattali
   github: aebarros    # eg. daattali
   twitter: arthurebarros   # eg. daattali
