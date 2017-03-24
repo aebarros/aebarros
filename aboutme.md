@@ -2,9 +2,7 @@
 layout: page
 title: About me
 subtitle: Where I tell you stuff about me
-bigimg: /img/me and rogue.jpg
 ---
-
 My name is Arthur
 
 - I work in fisheries science for UC Davis
