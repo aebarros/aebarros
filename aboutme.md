@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: About me
 subtitle: Where I tell you stuff about me
 bigimg: /img/me and rogue.jpg
