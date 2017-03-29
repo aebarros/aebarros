@@ -36,7 +36,7 @@ You may use whatever set of data you like along with this guide, as long as it h
 3. date/time information
 
 We will be utilizing catch information from the California Department of Fish and Wildlifes 20mm net survey. This survey uses a 20mm sled to target juvenile smelt in the Sacramento/San Joaquin delta during the spring months.  
-All the scripts and data for this guide can be found [here](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
+All the scripts and data for this guide can be found [here](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp).
 
 ---
 
@@ -190,5 +190,7 @@ data<-rename(data, latitude=Latitude, longitude=Longitude)
 
 Now our data is clean and ready to use!
 
-##The application page here will be constucted in due time
+##Creating the Application
+
+Next comes the fun part, getting to create our application!
 
