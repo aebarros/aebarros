@@ -39,6 +39,7 @@ You may use whatever set of data you like along with this guide, as long as it h
 We will be utilizing catch information from the California Department of Fish and Wildlifes 20mm net survey. This survey uses a 20mm sled to target juvenile smelt in the Sacramento/San Joaquin delta during the spring months.
 
 All the scripts and data for this guide can be found [here](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
+
 ---
 
 ## Collecting Our Data
@@ -142,7 +143,7 @@ data<-data.catch%>%
   inner_join(fishcodes)
 ```
 
-Using `head(data)` `sapply(data,class)` calls we can see that the joined data tables has a load of vectors we don't need, as well as
+Using `head(data)` and `sapply(data,class)` calls we can see that the joined data tables has a load of vectors we don't need, as well as
  the Date vector having a class of "factor". We need the Date vector to have a "date" class, and to remove the unnecessary columns like so:
  
 ```R
