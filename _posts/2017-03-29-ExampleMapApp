@@ -6,12 +6,14 @@ published: true
 date: '2017-03-29'
 ---
 
-## Description
 [Launch  Example Mapping Application](http://aebarros.com/shiny/CatchApp/ExampleMapApp/)
 ![screenshot of app](/img/examplemapappscreen.png)
 [Github link](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
 
 ---
+
+## Introduction
+
 This post will act as a step by step guide on how to use R to create basic mapping application for spatial data.  
 This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
 The guide will be utilizing the following packages:
@@ -25,12 +27,28 @@ The guide will be utilizing the following packages:
 *[leaflet](https://cran.r-project.org/web/packages/leaflet/leaflet.pdf)
 *[rsconnect](https://cran.r-project.org/web/packages/rsconnect/rsconnect.pdf)
 
+You may use whatever set of data you like along with this guide, as long as it has some key variables:
+1. the data you wish to display
+2. latitude and longitude coordinates
+3. date/time information
 
-The CatchApp  I created for the [Hobbs Lab](http://hobbslab.com/) combines catch data from CDFW (found [here](https://www.wildlife.ca.gov/Conservation/Delta)) and our own field research. The data covers several different gear types, such as the smelt larval sled, otter trawls, or 20mm nets. The data sets from the Hobbs Lab are currently up to date through the end of 2016, while the CDFW data set covers a range of dates, with their Otter Trawl/Midwater Trawl running through 2014, and their larval nets (SLS and 20mm) up to date through 2016.
-
-The app itself was created using R, with the two main packages used being [shiny](https://shiny.rstudio.com/) and [leaflet](https://rstudio.github.io/leaflet/). I created this application based off this [catch map](http://www.dfg.ca.gov/delta/data/sls/CPUE_map.asp) created by CDFW, and wished to do the same thing with our labs data.
-
-This application is a constant work in progress, if there are errors of bugs with the data or application, please email me at arthur.e.barros@gmail.com.
-Note, this app is being run on a private server, so it runs slowly and may take time to load.
+We will be utilizing catch information from the California Department of Fish and Wildlifes 20mm net survey. This survey uses a 20mm sled to target 
+juvenile smelt in the Sacramento/San Joaquin delta during the spring months.
 
 ---
+
+##Collecting Our Data
+For this guide I used the 20mm catch data from [CDFW](http://www.dfg.ca.gov/delta/projects.asp?ProjectID=20mm). I downloaded the access database
+from [ftp://ftp.dfg.ca.gov/Delta%20Smelt/] labeled as "20-mm.mdb". The 20 mm data base has five tables that we will be using:
+*20 mm stations (contains a list of station names and gps coordinates)
+*Catch (tells us the catch of each species of fish for each tow using a fishcode, this is what we wish to display)
+*Fish Codes (links the fishcodes to common names for each species)
+*Tow info (links the catch info to a specific tow, station, date, and duration)
+
+I exported each of these tables as a tab delimited .txt file into a "data" folder within my R-project.
+
+---
+
+##Cleaning Our Data
+In order to make the mapping application I need to bring together all the data from the above tables and get it into a format that I 
+can work with. 
