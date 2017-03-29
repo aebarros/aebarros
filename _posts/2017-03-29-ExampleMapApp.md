@@ -250,7 +250,7 @@ ui = bootstrapPage(theme = shinytheme("sandstone"),
 
 ### Server
 
-Next let's take a look at the server side of the script:
+Now let's take a look at the server side of the script:
 
 ```R
 server <- function(input, output, session) {
@@ -324,3 +324,78 @@ server <- function(input, output, session) {
 
 shinyApp(ui = ui, server = server)
 ```
+
+This is a lot to go through, so I'm going to try and break it into bite size chunks.
+The first section uses a reactive expression `reactive({ })` to build a new reactive data frame based on the user selections.  
+* The first bit creates a new df based on the species input `filtered.species<- data[data$Common.Name==input$species,]` that only includes data with the selected species.
+* The second bit `filtered.dates<-filtered.species[filtered.species$Date>=input$dates[1] & filtered.species$Date<=input$dates[2],]` does the same but based on the user selected date range.
+* Finally we wish to average all the CPUE data for the species within the selected date range. This is done with a `group_by` and `summarise` call. We also want to change those rows with a 0 for CPUE to a NA, so as to aid in mapping later on.
+* The complete data frame is named "filtered", and will be referenced as `filtered()` throughout the rest of the script.
+
+
+```R
+#Reactive expression used to filter out by user selected variables for final data "filtered()"
+  #for map generation
+  filtered<-reactive({
+    filtered.species<- data[data$Common.Name==input$species,]
+    filtered.dates<-filtered.species[filtered.species$Date>=input$dates[1] & filtered.species$Date<=input$dates[2],]
+    ##take averages of data in date range
+    filtered.dates=filtered.dates%>%
+      group_by_("Station","longitude","latitude","Common.Name")%>%
+      summarise(CPUE=mean(CPUE,na.rm=TRUE))
+    filtered.date <-  filtered.dates %>% mutate(CPUE = replace(CPUE,CPUE==0,NA))
+  })
+  ```
+  
+The next section produces two base maps for us to use. This is the first time we use the leaflet package. The base map used is titled "Hydda.Full" and other provider tiles can be seen [here](https://leaflet-extras.github.io/leaflet-providers/preview/).  
+* The first map `mymap1` uses a reactive expression to set the base map with boundaries set by the max and min latitude and longitude from the filtered() df.
+* The second map `mymap2` is used when no data fits the selected parameters (for example if a date range is selected during which no sampling tows occured) and just shows a blank map of the bay area.
+* The third section is an "if" statement to render the map, making the app display map2 if the number of rows in the filtered() df is equal to 0, meaning that no data fits those parameters. If `nrows(filtered())!=0` then map1 will display.
+  
+  ```R
+    #produces base map
+  mymap1 <- reactive({
+    leaflet(filtered())%>% addProviderTiles("Hydda.Full")%>%
+      fitBounds(~min(longitude)-.005, ~min(latitude)-.005, ~max(longitude)+.005, ~max(latitude)+.005)
+  })
+  #map2 is used if no data fits selected parameters, and will be blank
+  mymap2 <- reactive({
+    leaflet()%>% addProviderTiles("Hydda.Full")%>%
+      setView(lng = -122.40, lat = 37.85, zoom = 9)
+  })
+  #renders map for main panel in ui using an if function to create map fitting parameters
+  output$map <- renderLeaflet({
+    if(nrow(filtered())==0){mymap2()}else{mymap1()}
+  })
+  ```
+  
+  The final part of our application will be used to populate our map with our selected data.
+  
+  ```R
+  myfun <- function(map){
+    #this "pal" produces the desired colors and bins for distinguishing CPUE
+    pal<-colorBin(
+      palette="Reds",
+      domain=filtered()$CPUE,
+      bins=c(0,.1,1,10,100,1000),
+      pretty = TRUE,
+      na.color="black")
+    
+    #next call populates map with markers based on filtered() data
+    addCircleMarkers(map, data = filtered(),lng = ~longitude, lat = ~latitude,radius=~ifelse(is.na(filtered()$CPUE),2,10),
+                     stroke=TRUE, color="black",weight=2, fillOpacity=1,
+                     fillColor=~pal(filtered()$CPUE),
+                     popup = ~paste("Catch per Minute Towed:", filtered()$CPUE, "<br>",
+                                    "Station:", Station,"<br>",
+                                    "Coordinates:", latitude,",",longitude,"<br>"))%>%
+      addLegend("bottomleft", pal=pal, values=filtered()$CPUE, title="Catch Per Minute of Tow",
+                opacity=1)
+  }
+  #here is an observation using leafletProxy to take the above function and run it on our map
+  #also have to have the "clear" calls here, as they won't work in the myfun
+  observe({
+    leafletProxy("map")%>%
+      clearControls%>%
+      clearMarkers()%>% myfun()
+  })
+  ```
