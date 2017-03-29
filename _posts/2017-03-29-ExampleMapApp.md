@@ -18,15 +18,15 @@ This post will act as a step by step guide on how to use R to create basic mappi
 This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
 The guide will be utilizing the following packages:
 
-*[plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf) 
-*[dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf) 
-*[lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf) 
-*[reshape2](https://cran.r-project.org/web/packages/reshape2/reshape2.pdf) 
-*[purr](https://cran.r-project.org/web/packages/purrr/purrr.pdf) 
-*[shiny](https://cran.r-project.org/web/packages/shiny/shiny.pdf) 
-*[shinythemes](https://cran.r-project.org/web/packages/shinythemes/shinythemes.pdf) 
-*[leaflet](https://cran.r-project.org/web/packages/leaflet/leaflet.pdf) 
-*[rsconnect](https://cran.r-project.org/web/packages/rsconnect/rsconnect.pdf) 
+* [plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf) 
+* [dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf) 
+* [lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf) 
+* [reshape2](https://cran.r-project.org/web/packages/reshape2/reshape2.pdf) 
+* [purr](https://cran.r-project.org/web/packages/purrr/purrr.pdf) 
+* [shiny](https://cran.r-project.org/web/packages/shiny/shiny.pdf) 
+* [shinythemes](https://cran.r-project.org/web/packages/shinythemes/shinythemes.pdf) 
+* [leaflet](https://cran.r-project.org/web/packages/leaflet/leaflet.pdf) 
+* [rsconnect](https://cran.r-project.org/web/packages/rsconnect/rsconnect.pdf) 
 
 You may use whatever set of data you like along with this guide, as long as it has some key variables:
 
@@ -43,10 +43,10 @@ We will be utilizing catch information from the California Department of Fish an
 For this guide I used the 20mm catch data from [CDFW](http://www.dfg.ca.gov/delta/projects.asp?ProjectID=20mm). I downloaded the access database
 from [ftp://ftp.dfg.ca.gov/Delta%20Smelt/] labeled as "20-mm.mdb". The 20 mm data base has five tables that we will be using:
 
-*20 mm stations (contains a list of station names and gps coordinates)
-*Catch (tells us the catch of each species of fish for each tow using a fishcode, this is what we wish to display)
-*Fish Codes (links the fishcodes to common names for each species)
-*Tow info (links the catch info to a specific tow, station, date, and duration)
+* 20 mm stations (contains a list of station names and gps coordinates)
+* Catch (tells us the catch of each species of fish for each tow using a fishcode, this is what we wish to display)
+* Fish Codes (links the fishcodes to common names for each species)
+* Tow info (links the catch info to a specific tow, station, date, and duration)
 
 I exported each of these tables as a tab delimited .txt file into a "data" folder within my R-project.
 
