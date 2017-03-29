@@ -38,7 +38,7 @@ We will be utilizing catch information from the California Department of Fish an
 
 ---
 
-##Collecting Our Data
+## Collecting Our Data
 
 For this guide I used the 20mm catch data from [CDFW](http://www.dfg.ca.gov/delta/projects.asp?ProjectID=20mm). I downloaded the access database
 from [ftp://ftp.dfg.ca.gov/Delta%20Smelt/] labeled as "20-mm.mdb". The 20 mm data base has five tables that we will be using:
@@ -52,7 +52,7 @@ I exported each of these tables as a tab delimited .txt file into a "data" folde
 
 ---
 
-##Cleaning Our Data
+## Cleaning Our Data
 
 In order to make the mapping application I need to bring together all the data from the above tables and get it into a format that I 
 can work with. My end goal here is a dataset similar to the following:
@@ -64,3 +64,21 @@ Station|Date|longitude|latitude|Common.Name|CPUE
 (note: catch per unit effort (CPUE) is the data we will be displaying)
 
 In order to reach this point we will be creating a cleaning script titled "global.R" saved within our project.
+We being the script by loading our packages:
+
+```R
+library(plyr)
+library(dplyr)
+library(lubridate)
+library(reshape2)
+library(purrr)
+```
+
+folowed by loading the required data:
+
+```R
+data.catch=read.table("data/catch.txt", header= T, sep= "\t")
+fishcodes=read.table("data/fishcodes.txt", header= T, sep= "\t")
+data.stations=read.table("data/stations.txt", header= T, sep= "\t")
+data.tows=read.table("data/towinfo.txt", header= T, sep= "\t")
+```
