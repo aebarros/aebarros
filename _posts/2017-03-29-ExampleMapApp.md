@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Example Mapping Application
-subtitle: A step by step guide on how to create a mapping applicatin using R
+title: Making a Map App using R
+subtitle: A step by step guide on how to create a mapping application to display spatial data
 published: true
 date: '2017-03-29'
 ---
@@ -64,8 +64,6 @@ Station|Date|longitude|latitude|Common.Name|CPUE
 809|1995-04-24|-121.6892|38.05250|American shad|0
 
 (note: catch per unit effort (CPUE) is the data we will be displaying)
-
-If your data already looks like this, you can skip this section entirely.
 
 In order to reach this point we will be creating a cleaning script titled "global.R" saved within our project.
 We being the script by loading our packages:
