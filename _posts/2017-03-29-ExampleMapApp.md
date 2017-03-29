@@ -77,7 +77,7 @@ library(reshape2)
 library(purrr)
 ```
 
-folowed by loading the required data:
+followed by loading the required data:
 
 ```R
 data.catch=read.table("data/catch.txt", header= T, sep= "\t")
@@ -127,9 +127,32 @@ head(data.stations)
 keep<-c("Station","Latitude","Longitude")
 data.stations<-data.stations[ , which(names(data.stations) %in% keep)]
 head(data.stations)
-#transform Lat and Long to numeric
+#transform Lat and Long to numeric class
 data.stations<-transform(data.stations, Latitude = as.numeric(Latitude), Longitude = as.numeric(Longitude))
 ```
 
 Now a simple `head(data.stations)` call will show us that at least our stations information is formated properly.
+
+Our next step in preparing our data for the application is to joing all our tables together using a series of `inner_join` calls. I do this here with dplyr piping.
+
+```R
+data<-data.catch%>%
+  inner_join(data.stations)%>%
+  inner_join(data.tows)%>%
+  inner_join(fishcodes)
+```
+
+Using `head(data)` `sapply(data,class)` calls we can see that the joined data tables has a load of vectors we don't need, as well as
+ the Date vector having a class of "factor". We need the Date vector to have a "date" class, and to remove the unnecessary columns like so:
+ 
+```R
+#format dates#
+sapply(data,class)
+data$Date <- as.Date(data$Date , "%m/%d/%Y")
+
+#keep columns we need#
+keeps<-c("Date","Station","Latitude","Longitude","Fish.Code","Catch","Duration","Common.Name")
+data<-data[ , which(names(data) %in% keeps)]
+```
+
 
