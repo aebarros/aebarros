@@ -51,4 +51,12 @@ I exported each of these tables as a tab delimited .txt file into a "data" folde
 
 ##Cleaning Our Data
 In order to make the mapping application I need to bring together all the data from the above tables and get it into a format that I 
-can work with. 
+can work with. My end goal here is a dataset similar to the following:
+
+Station|Date|longitude|latitude|Common.Name|CPUE
+---|---|---|---|---|---
+809|1995-04-24|-121.6892|38.05250|American shad|0
+
+(note: catch per unit effort (CPUE) is the data we will be displaying)
+
+In order to reach this point we will be creating a cleaning script titled "global.R" saved within our project.
