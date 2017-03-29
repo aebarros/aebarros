@@ -14,7 +14,11 @@ date: '2017-03-29'
 
 ---
 
-## Introduction
+## Contents
+
+[Introduction][intro]
+
+## [intro]Introduction
 
 This post will act as a step by step guide on how to use R to create basic mapping application for spatial data. This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
 The guide will be utilizing the following packages:
@@ -190,6 +194,8 @@ data<-rename(data, latitude=Latitude, longitude=Longitude)
 
 Now our data is clean and ready to use!
 
+---
+
 ## Creating the Application
 
 Next comes the fun part, getting to create our application! This section will be split in two, starting with a section covering the ui, and finishing with the server. If none of that make sense to you I suggest visiting [this page](https://shiny.rstudio.com/tutorial/)
@@ -247,6 +253,8 @@ ui = bootstrapPage(theme = shinytheme("sandstone"),
                      )
 )
 ```
+
+---
 
 ### Server
 
