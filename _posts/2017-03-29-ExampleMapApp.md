@@ -144,7 +144,7 @@ data<-data.catch%>%
 ```
 
 Using `head(data)` and `sapply(data,class)` calls we can see that the joined data tables has a load of vectors we don't need, as well as
- the Date vector having a class of "factor". We need the Date vector to have a "date" class, and to remove the unnecessary columns like so:
+ the Date vector having a class of "factor". We need the Date vector to have a "date" class for use by the shiny app, and to remove the unnecessary columns like so:
  
 ```R
 #format dates#
@@ -190,7 +190,64 @@ data<-rename(data, latitude=Latitude, longitude=Longitude)
 
 Now our data is clean and ready to use!
 
-##Creating the Application
+## Creating the Application
 
-Next comes the fun part, getting to create our application!
+Next comes the fun part, getting to create our application! This section will be split in two, starting with a section covering the ui, and finishing with the server. If none of that make sense to you I suggest visiting [this page](https://shiny.rstudio.com/tutorial/)
+
+Before anything else, create a new script in your project named "app.R". This will be recognized as your application when you later go to deploy.
+
+### UI
+
+The first section of our script is the ui, which basically sets out the user interface. Here we establish the html layout for our app, and set up the inputs to take values from the user. Once again we start the script by loading the required packages, and then we will source "global.R" that we created in the data cleaning section.
+
+```R
+###Load Packages###
+##always load plyr before dplyr##
+library(plyr)
+library(dplyr)
+library(lubridate)
+library(shiny)
+library(reshape2)
+library(leaflet)
+library(shinythemes)
+library(rsconnect)
+
+##source the global file with all the necessary data
+source("global.R")
+```
+
+Next follows the ui code itself. A few things of notes with this script:
+
+*  Shiny themes are community created layouts provided by the shinythemes package that effect the format of the page. Examples of those themes can be found [here](https://rstudio.github.io/shinythemes/).
+* I've set the height of the map itself to be 100% of the users screen height minus 120 pixels using `tags$style(type = "text/css", "#map {height: calc(100vh - 120px) !important;}"),`
+* The `apsolutePanel` sets up a panel with all our input select options on the right side of the main panel. The header is set as `h2("Catch Explorer")`
+* Our two input selections are named "Species" and "Date range", these allow the user to select the parameters of the map that will be displayed. With the species input I use `selectizeInput()` which allows for selecting from a scroll bar or typing in the species name. For the date range input I used a `dateRangeInput` which allows the user to select a range of dates from which tow data will be displayed.
+* The `submitButton("Submit"))` at the bottom of the ui allows the user to select inputs and then submit the changes. Without this option the map will automatically update each time a new parameter is selected, which can be problematic when setting the date range.
+
+```R
+##UI building
+ui = bootstrapPage(theme = shinytheme("sandstone"),
+                     div(
+                       id = "app-content",
+                       navbarPage("CDFW 20mm Catch"),
+                       tags$style(type = "text/css", "#map {height: calc(100vh - 120px) !important;}"),
+                       leafletOutput("map", height = "100%"),
+                       tags$div(id="cite",
+                                'Data compiled by Arthur Barros (2017).'
+                       ),
+                       absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
+                                     draggable = FALSE, top = 60, left = "auto", right = 20, bottom = "auto",
+                                     width = 200, height = "auto",
+                                     h2("Catch Explorer"),
+                                     selectizeInput("species", "Species",
+                                                    unique(as.character(data$Common.Name))),
+                                     dateRangeInput("dates","Date range", start="2015-03-01", end="2015-03-31"),
+                                     textOutput("DateRange"),
+                                     submitButton("Submit"))
+                     )
+)
+```
+
+### Server
+
 
