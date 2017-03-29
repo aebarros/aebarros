@@ -9,9 +9,22 @@ date: '2017-03-29'
 ## Description
 [Launch  Example Mapping Application](http://aebarros.com/shiny/CatchApp/ExampleMapApp/)
 ![screenshot of app](/img/examplemapappscreen.png)
+[Github link](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
 
+---
 This post will act as a step by step guide on how to use R to create basic mapping application for spatial data.  
 This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
+The guide will be utilizing the following packages:
+*[plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf)
+*[dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
+*[lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf)
+*[reshape2](https://cran.r-project.org/web/packages/reshape2/reshape2.pdf)
+*[purr](https://cran.r-project.org/web/packages/purrr/purrr.pdf)
+*[shiny](https://cran.r-project.org/web/packages/shiny/shiny.pdf)
+*[shinythemes](https://cran.r-project.org/web/packages/shinythemes/shinythemes.pdf)
+*[leaflet](https://cran.r-project.org/web/packages/leaflet/leaflet.pdf)
+*[rsconnect](https://cran.r-project.org/web/packages/rsconnect/rsconnect.pdf)
+
 
 The CatchApp  I created for the [Hobbs Lab](http://hobbslab.com/) combines catch data from CDFW (found [here](https://www.wildlife.ca.gov/Conservation/Delta)) and our own field research. The data covers several different gear types, such as the smelt larval sled, otter trawls, or 20mm nets. The data sets from the Hobbs Lab are currently up to date through the end of 2016, while the CDFW data set covers a range of dates, with their Otter Trawl/Midwater Trawl running through 2014, and their larval nets (SLS and 20mm) up to date through 2016.
 
@@ -21,4 +34,3 @@ This application is a constant work in progress, if there are errors of bugs wit
 Note, this app is being run on a private server, so it runs slowly and may take time to load.
 
 ---
-![screenshot of app](/img/examplemapappscreen.png)
