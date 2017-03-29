@@ -16,8 +16,7 @@ date: '2017-03-29'
 
 ## Introduction
 
-This post will act as a step by step guide on how to use R to create basic mapping application for spatial data.  
-This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
+This post will act as a step by step guide on how to use R to create basic mapping application for spatial data. This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
 The guide will be utilizing the following packages:
 
 * [plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf) 
@@ -36,8 +35,7 @@ You may use whatever set of data you like along with this guide, as long as it h
 2. latitude and longitude coordinates
 3. date/time information
 
-We will be utilizing catch information from the California Department of Fish and Wildlifes 20mm net survey. This survey uses a 20mm sled to target juvenile smelt in the Sacramento/San Joaquin delta during the spring months.
-
+We will be utilizing catch information from the California Department of Fish and Wildlifes 20mm net survey. This survey uses a 20mm sled to target juvenile smelt in the Sacramento/San Joaquin delta during the spring months.  
 All the scripts and data for this guide can be found [here](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
 
 ---
