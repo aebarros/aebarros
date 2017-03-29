@@ -87,7 +87,7 @@ data.stations=read.table("data/stations.txt", header= T, sep= "\t")
 data.tows=read.table("data/towinfo.txt", header= T, sep= "\t")
 ```
 
-Next I want to inspect the elements using the sapply funtion. This funtion is useful to discover the classtype of each vector.
+Next I want to inspect the elements using the sapply funtion. This funtion is useful to discover the class/type of each vector.
 
 ```R
 #####inspect elements#
