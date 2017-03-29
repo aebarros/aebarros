@@ -2,7 +2,7 @@
 layout: post
 title: Example Mapping Application
 subtitle: A step by step guide on how to create a mapping applicatin using R
-published: false
+published: true
 date: '2017-03-29'
 ---
 
