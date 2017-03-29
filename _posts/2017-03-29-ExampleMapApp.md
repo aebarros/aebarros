@@ -369,7 +369,14 @@ The next section produces two base maps for us to use. This is the first time we
   })
   ```
   
-  The final part of our application will be used to populate our map with our selected data.
+The final part of our application will be used to populate our map with our selected data. It is only using data from the filtered() df at this point.  
+* The `pal<-` call sets the pallet for CPUE values. Basically it uses default shades of red, to assign color values to each marker that will be displayed on the map based on the CPUE value. For any station with a CPUE value of NA, the color will be black.
+* The `addCircleMarkers` is a leaflet call to populate our map with markers.
+  * Using an `ifelse` call I have set the radius size for each marker to be a default of 10, or 2 if the CPUE is NA.
+  * The `fillColor` call sets the color of each marker using the pallet set above, again based on the CPUE value.
+  * The `popup` call allows a text box to display when the user clicks on a marker. In this case the text box will display the CPUE, station number, and its coordinates.
+  * The `addLegend` produces a map legend based on the pallet.
+* The last function is an `observe({ })` function. This clears any markers and legend on the map before producing a new one, each time the submit button is clicked.
   
   ```R
   myfun <- function(map){
