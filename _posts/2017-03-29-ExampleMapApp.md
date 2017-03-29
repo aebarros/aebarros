@@ -7,7 +7,9 @@ date: '2017-03-29'
 ---
 
 [Launch  Example Mapping Application](http://aebarros.com/shiny/CatchApp/ExampleMapApp/)
+
 ![screenshot of app](/img/examplemapappscreen.png)
+
 [Github link](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
 
 ---
@@ -36,6 +38,7 @@ You may use whatever set of data you like along with this guide, as long as it h
 
 We will be utilizing catch information from the California Department of Fish and Wildlifes 20mm net survey. This survey uses a 20mm sled to target juvenile smelt in the Sacramento/San Joaquin delta during the spring months.
 
+All the scripts and data for this guide can be found [here](https://github.com/aebarros/shiny-server/tree/master/ExampleMapApp)
 ---
 
 ## Collecting Our Data
@@ -82,3 +85,51 @@ fishcodes=read.table("data/fishcodes.txt", header= T, sep= "\t")
 data.stations=read.table("data/stations.txt", header= T, sep= "\t")
 data.tows=read.table("data/towinfo.txt", header= T, sep= "\t")
 ```
+
+Next I want to inspect the elements using the sapply funtion. This funtion is useful to discover the classtype of each vector.
+
+```R
+#####inspect elements#
+head(data.stations)
+sapply(data.stations,class)
+```
+
+After running this code you may notice some obvious issues with our data:
+
+1. Latitude and Longitude are each broken up into seperate vectors for degrees, minutes, and seconds
+2. Each of those vectors has a different class, either integer or numeric
+
+This is not at all what we want, so our first step will be to turn our Latitude and Longitude into decimal degree format, and each under its own vector using the following calls:
+
+```R
+#transform into decimal degrees
+data.stations$LatS<-data.stations$LatS/3600
+data.stations$LatM<-data.stations$LatM/60
+data.stations$LonS<-data.stations$LonS/3600
+data.stations$LonM<-data.stations$LonM/60
+#add minutes and seconds together
+data.stations$LatMS<-data.stations$LatM+data.stations$LatS
+data.stations$LonMS<-data.stations$LonM+data.stations$LonS
+#combine data
+data.stations$Latitude <- paste(data.stations$LatD,data.stations$LatMS)
+data.stations$Longitude <- paste(data.stations$LonD,data.stations$LonMS)
+head(data.stations)
+#remove spaces and first zero, replace with "."
+data.stations$Latitude <- gsub(" 0.", ".", data.stations$Latitude)
+data.stations$Longitude <- gsub(" 0.", ".", data.stations$Longitude)
+head(data.stations)
+#add "-" infront of all longitude
+data.stations$negative <- rep("-",nrow(data.stations)) # make new column 
+data.stations$Longitude<-paste(data.stations$negative, data.stations$Longitude)
+data.stations$Longitude <- gsub(" ", "", data.stations$Longitude)
+head(data.stations)
+#keep columns we need#
+keep<-c("Station","Latitude","Longitude")
+data.stations<-data.stations[ , which(names(data.stations) %in% keep)]
+head(data.stations)
+#transform Lat and Long to numeric
+data.stations<-transform(data.stations, Latitude = as.numeric(Latitude), Longitude = as.numeric(Longitude))
+```
+
+Now a simple `head(data.stations)` call will show us that at least our stations information is formated properly.
+
