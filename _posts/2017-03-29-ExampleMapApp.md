@@ -18,15 +18,15 @@ This post will act as a step by step guide on how to use R to create basic mappi
 This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
 The guide will be utilizing the following packages:
 
-*[plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf)
-*[dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
-*[lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf)
-*[reshape2](https://cran.r-project.org/web/packages/reshape2/reshape2.pdf)
-*[purr](https://cran.r-project.org/web/packages/purrr/purrr.pdf)
-*[shiny](https://cran.r-project.org/web/packages/shiny/shiny.pdf)
-*[shinythemes](https://cran.r-project.org/web/packages/shinythemes/shinythemes.pdf)
-*[leaflet](https://cran.r-project.org/web/packages/leaflet/leaflet.pdf)
-*[rsconnect](https://cran.r-project.org/web/packages/rsconnect/rsconnect.pdf)
+*[plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf) 
+*[dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf) 
+*[lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf) 
+*[reshape2](https://cran.r-project.org/web/packages/reshape2/reshape2.pdf) 
+*[purr](https://cran.r-project.org/web/packages/purrr/purrr.pdf) 
+*[shiny](https://cran.r-project.org/web/packages/shiny/shiny.pdf) 
+*[shinythemes](https://cran.r-project.org/web/packages/shinythemes/shinythemes.pdf) 
+*[leaflet](https://cran.r-project.org/web/packages/leaflet/leaflet.pdf) 
+*[rsconnect](https://cran.r-project.org/web/packages/rsconnect/rsconnect.pdf) 
 
 You may use whatever set of data you like along with this guide, as long as it has some key variables:
 
