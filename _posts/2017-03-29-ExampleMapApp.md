@@ -16,7 +16,7 @@ date: '2017-03-29'
 
 This post will act as a step by step guide on how to use R to create basic mapping application for spatial data.  
 This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
-The guide will be utilizing the following packages:
+The guide will be utilizing the following packages:  
 *[plyr](https://cran.r-project.org/web/packages/plyr/plyr.pdf)
 *[dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
 *[lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf)
