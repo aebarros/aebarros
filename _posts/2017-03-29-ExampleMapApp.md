@@ -190,5 +190,7 @@ Finally we want to change the vector name for the Latitude and Longitude vectors
 data<-rename(data, latitude=Latitude, longitude=Longitude)
 ```
 
-Finally our data is clean and ready to use!
+Now our data is clean and ready to use!
+
+##The application page here will be constucted in due time
 
