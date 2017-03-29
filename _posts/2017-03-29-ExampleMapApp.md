@@ -16,9 +16,9 @@ date: '2017-03-29'
 
 ## Contents
 
-[Introduction][intro]
+[Introduction] [intro]
 
-## [intro]Introduction
+## [intro]: Introduction
 
 This post will act as a step by step guide on how to use R to create basic mapping application for spatial data. This guide assumes a basic understanding of R, [RStudio](https://www.rstudio.com/), and [R Shiny](https://shiny.rstudio.com/).
 The guide will be utilizing the following packages:
