@@ -216,7 +216,7 @@ library(rsconnect)
 source("global.R")
 ```
 
-Next follows the ui code itself. A few things of notes with this script:
+Next follows the ui code itself. A few things of notes with this:
 
 *  Shiny themes are community created layouts provided by the shinythemes package that effect the format of the page. Examples of those themes can be found [here](https://rstudio.github.io/shinythemes/).
 * I've set the height of the map itself to be 100% of the users screen height minus 120 pixels using `tags$style(type = "text/css", "#map {height: calc(100vh - 120px) !important;}"),`
