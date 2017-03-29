@@ -67,6 +67,8 @@ Station|Date|longitude|latitude|Common.Name|CPUE
 
 (note: catch per unit effort (CPUE) is the data we will be displaying)
 
+If your data already looks like this, you can skip this section entirely.
+
 In order to reach this point we will be creating a cleaning script titled "global.R" saved within our project.
 We being the script by loading our packages:
 
@@ -134,7 +136,7 @@ data.stations<-transform(data.stations, Latitude = as.numeric(Latitude), Longitu
 
 Now a simple `head(data.stations)` call will show us that at least our stations information is formated properly.
 
-Our next step in preparing our data for the application is to joing all our tables together using a series of `inner_join` calls. I do this here with dplyr piping.
+Our next step in preparing our data for the application is to joing all our tables together using a series of `inner_join` calls. I do this here with dplyr piping "%>%".
 
 ```R
 data<-data.catch%>%
@@ -156,4 +158,37 @@ keeps<-c("Date","Station","Latitude","Longitude","Fish.Code","Catch","Duration",
 data<-data[ , which(names(data) %in% keeps)]
 ```
 
+Next I want to do two things, first calculate a Catch Per Unit of Effort (here calculated as catch/tow duration) and then add in an "All" option which combines the catch for all species caught in each tow. This is all done using the following:
+
+```R
+#calculate CPUE
+data$CPUE=data$Catch/data$Duration
+head(data)
+
+###Next section to calculate "All" CPUE for each tow
+#reshape fish catch to wide format
+datawide <- dcast(data, Station +Latitude+Longitude+Duration+ Date ~ Common.Name, value.var="CPUE",fun.aggregate=sum)
+head(datawide)
+#learn which column numbers apply to fish
+which(colnames(datawide)=="American shad")
+which(colnames(datawide)=="yellowfin goby")
+#calculate All
+datawide$All=rowSums(datawide[,6:71], na.rm=T)
+head(datawide)
+#melt back straight
+data=melt(datawide,id.vars=c("Station","Date","Longitude","Latitude"), measure.vars=c(6:72),
+             variable.name="Common.Name",
+             value.name="CPUE")
+```
+
+The dcast and melt calls used above are both from the reshape2 package, and restructure a molten data frame into an array or data frame.
+
+Finally we want to change the vector name for the Latitude and Longitude vectors in our data frame. When creating the application, the leaflet package will automatically recognize the lat and long vectors as coordinates to use, but not if they are named "Latitude" and "Longitude" with capital "L"s. Here we simply change those to lower case to make life easier down the road.
+
+```R
+#rename Lat and Lon for leaflet
+data<-rename(data, latitude=Latitude, longitude=Longitude)
+```
+
+Finally our data is clean and ready to use!
 
