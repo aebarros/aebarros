@@ -132,7 +132,7 @@ data.stations<-transform(data.stations, Latitude = as.numeric(Latitude), Longitu
 
 Now a simple `head(data.stations)` call will show us that at least our stations information is formated properly.
 
-Our next step in preparing our data for the application is to joing all our tables together using a series of `inner_join` calls. I do this here with dplyr piping "%>%".
+Our next step in preparing our data for the application is to join all our tables together using a series of `inner_join` calls. I do this here with dplyr piping "%>%".
 
 ```R
 data<-data.catch%>%
