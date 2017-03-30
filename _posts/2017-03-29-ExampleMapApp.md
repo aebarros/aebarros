@@ -408,3 +408,5 @@ The final part of our application will be used to populate our map with our sele
       clearMarkers()%>% myfun()
   })
   ```
+  
+  Now our app is complete! Run it using the "Run app" button (if you are using RStudio) or the runapp() call.
