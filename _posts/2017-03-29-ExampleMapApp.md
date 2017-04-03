@@ -409,4 +409,14 @@ The final part of our application will be used to populate our map with our sele
   })
   ```
   
+Finaly we wrap it all up with a session end script, which allows the application to shut itself down when the window is closed. This is useful specifically when hosting the ap online, so as not to drain server resources.
+  
+  ```R
+    # Stop shiny app when closing the browser
+  session$onSessionEnded(stopApp)
+}
+
+shinyApp(ui = ui, server = server)
+```
+  
   Now our app is complete! Run it using the "Run app" button (if you are using RStudio) or the runapp() call.
