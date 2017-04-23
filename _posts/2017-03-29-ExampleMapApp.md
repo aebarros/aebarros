@@ -43,7 +43,7 @@ All the scripts and data for this guide can be found [here](https://github.com/a
 ## Collecting Our Data
 
 For this guide I used the 20mm catch data from [CDFW](http://www.dfg.ca.gov/delta/projects.asp?ProjectID=20mm). I downloaded the access database
-from [ftp://ftp.dfg.ca.gov/Delta%20Smelt/] labeled as "20-mm.mdb". The 20 mm data base has four tables that we will be using:
+from [ftp://ftp.dfg.ca.gov/Delta%20Smelt/](ftp://ftp.dfg.ca.gov/Delta%20Smelt/) labeled as "20-mm.mdb". The 20 mm data base has four tables that we will be using:
 
 * 20 mm stations (contains a list of station names and gps coordinates)
 * Catch (tells us the catch of each species of fish for each tow using a fishcode, this is what we wish to display)
