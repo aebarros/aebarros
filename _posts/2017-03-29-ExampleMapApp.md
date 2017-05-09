@@ -66,7 +66,7 @@ Station|Date|longitude|latitude|Common.Name|CPUE
 (note: catch per unit effort (CPUE) is the data we will be displaying)
 
 In order to reach this point we will be creating a cleaning script titled "global.R" saved within our project.
-We being the script by loading our packages:
+We begin the script by loading our packages:
 
 ```R
 library(plyr)
@@ -85,7 +85,7 @@ data.stations=read.table("data/stations.txt", header= T, sep= "\t")
 data.tows=read.table("data/towinfo.txt", header= T, sep= "\t")
 ```
 
-Next I want to inspect the elements using the sapply funtion. This funtion is useful to discover the class/type of each vector.
+Next I want to inspect the elements using the "sapply" funtion. This funtion is useful to discover the class/type of each vector.
 
 ```R
 #####inspect elements#
@@ -141,7 +141,7 @@ data<-data.catch%>%
   inner_join(fishcodes)
 ```
 
-Using `head(data)` and `sapply(data,class)` calls we can see that the joined data tables has a load of vectors we don't need, as well as
+Using `head(data)` and `sapply(data,class)` calls we can see that the joined data table has a load of vectors we don't need, as well as
  the Date vector having a class of "factor". We need the Date vector to have a "date" class for use by the shiny app, and to remove the unnecessary columns like so:
  
 ```R
